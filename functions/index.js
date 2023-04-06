@@ -1,6 +1,7 @@
 import functions from "firebase-functions"; //makes as cloud func
 import express from "express";
 import cors from "cors";
+import { addEmployee, deleteEmployee, getAllEmployees, updateEmployee } from "./src/employees.js";
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,11 @@ app.get('/test', (req, res) => {
 app.get('/hello', (req, res) => {
   res.send("Hello there!");
 })
+
+app.post("/employee", addEmployee);
+app.get("/employee", getAllEmployees);
+app.delete("/employee/:empId", deleteEmployee);
+app.patch("/employee/:empId", updateEmployee);
 
 export const api = functions.https.onRequest(app); //makes as cloud func
 
